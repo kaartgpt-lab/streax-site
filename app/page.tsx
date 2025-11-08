@@ -59,7 +59,6 @@ export default function Page(): JSX.Element {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
         className="flex flex-col items-center justify-center min-h-[80vh] text-center px-6 py-24 bg-gradient-to-b from-indigo-900/10 via-purple-800/5 to-[#0C0F1A]"
       >
         <h1 className="text-3xl md:text-5xl font-extrabold uppercase leading-tight">
@@ -137,7 +136,6 @@ export default function Page(): JSX.Element {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
         className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center scroll-mt-24"
       >
         <div className="bg-[#101322] rounded-2xl p-8 shadow-lg space-y-4">
@@ -188,7 +186,6 @@ export default function Page(): JSX.Element {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
         className="bg-[#0c0f1d] py-20 text-center px-6 scroll-mt-24"
       >
         <p className="text-gray-400 max-w-3xl mx-auto mb-12">
@@ -215,7 +212,6 @@ export default function Page(): JSX.Element {
           {testimonials.map((item, idx) => (
             <motion.div
               key={idx}
-              variants={fadeUp}
               className={`rounded-2xl p-6 bg-[#131624] border ${
                 idx === 1
                   ? "border-pink-500 shadow-[0_0_25px_rgba(236,72,153,0.4)]"
@@ -235,7 +231,6 @@ export default function Page(): JSX.Element {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
         className="py-20 px-6 max-w-7xl mx-auto scroll-mt-24"
       >
         <h2 className="text-5xl font-extrabold uppercase mb-6">News</h2>
@@ -258,7 +253,6 @@ export default function Page(): JSX.Element {
           {[1, 2, 3].map((i) => (
             <motion.div
               key={i}
-              variants={fadeUp}
               className="bg-[#101322] rounded-2xl overflow-hidden shadow-lg p-6"
             >
               <div className="bg-[#16192a] h-32 rounded-xl mb-4 flex items-center justify-center text-pink-400 font-bold text-xl">
@@ -282,7 +276,6 @@ export default function Page(): JSX.Element {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
         className="py-20 px-6 bg-[#0c0f1d] text-center scroll-mt-24"
       >
         <h2 className="text-5xl md:text-6xl font-extrabold uppercase mb-6">
