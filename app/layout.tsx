@@ -8,12 +8,16 @@ export const metadata: Metadata = {
   description: "No-server Next.js app with localStorage persistence",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
         <Navbar />
-        <main className="container py-8">{children}</main>
+        <main className="container">{children}</main>
         <Footer />
       </body>
     </html>
