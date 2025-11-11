@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Tanzanite – Next App",
+  title: "Streax",
   description: "No-server Next.js app with localStorage persistence",
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <main className="container">{children}</main>
+        <main className="bg-[#0b0c1a] pt-12 container">{children}</main>
         <Footer />
       </body>
     </html>

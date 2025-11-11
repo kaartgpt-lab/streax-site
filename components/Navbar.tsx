@@ -10,7 +10,7 @@ const links = [
   { href: "/creators", label: "Creators" },
   { href: "/analytics", label: "Analytics" },
   { href: "/jobs", label: "Jobs" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blogs", label: "Blogs" },
 ];
 
 export default function Navbar() {
@@ -25,7 +25,7 @@ export default function Navbar() {
         bg-transparent
       `}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Left Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="relative flex items-center justify-center w-8 h-8">
