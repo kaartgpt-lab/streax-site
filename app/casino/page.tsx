@@ -15,12 +15,12 @@ const casinos = [
   {
     name: "Stake",
     year: 2017,
-    icon: <FaDice size={28} className="text-pink-500" />,
+    icon: <FaDice size={28} className="text-indigo-400" />,
   },
   {
     name: "Roobet",
     year: 2019,
-    icon: <FaMoneyBillWave size={28} className="text-green-500" />,
+    icon: <FaMoneyBillWave size={28} className="text-emerald-400" />,
   },
   {
     name: "FortuneJack",
@@ -30,22 +30,22 @@ const casinos = [
   {
     name: "BitStarz",
     year: 2016,
-    icon: <FaGem size={28} className="text-blue-400" />,
+    icon: <FaGem size={28} className="text-sky-400" />,
   },
   {
     name: "BC.Game",
     year: 2018,
-    icon: <FaTicketAlt size={28} className="text-purple-500" />,
+    icon: <FaTicketAlt size={28} className="text-purple-400" />,
   },
   {
     name: "Duel",
     year: 2020,
-    icon: <FaDice size={28} className="text-red-500" />,
+    icon: <FaDice size={28} className="text-red-400" />,
   },
   {
     name: "Shuffle",
     year: 2019,
-    icon: <FaCoins size={28} className="text-pink-400" />,
+    icon: <FaCoins size={28} className="text-amber-400" />,
   },
   {
     name: "Rainbet",
@@ -61,7 +61,7 @@ const casinos = [
 
 export default function CasinoPage() {
   const [search, setSearch] = useState("");
-  const [view, setView] = useState("directory");
+  const [view, setView] = useState<"directory" | "table">("directory");
   const [sortDesc, setSortDesc] = useState(true);
 
   const filteredCasinos = casinos
@@ -69,7 +69,7 @@ export default function CasinoPage() {
     .sort((a, b) => (sortDesc ? b.year - a.year : a.year - b.year));
 
   return (
-    <main className="bg-[#0C0F1A] min-h-screen">
+    <main className="pt-10 bg-[#0C0F1A] min-h-screen">
       <section className="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 py-12">
         <SectionTitle
           title="CASINOS"
@@ -85,7 +85,7 @@ export default function CasinoPage() {
             className="relative w-36 h-8 bg-[#16192a] rounded-full cursor-pointer flex items-center transition"
           >
             <div
-              className={`absolute w-1/2 h-8 bg-pink-600 rounded-full transition-all duration-300 ease-in-out ${
+              className={`absolute w-1/2 h-8 bg-indigo-500 rounded-full transition-all duration-300 ease-in-out ${
                 view === "directory" ? "left-0" : "left-1/2"
               }`}
             />
@@ -113,13 +113,13 @@ export default function CasinoPage() {
             <input
               type="text"
               placeholder="Search casinos"
-              className="pl-9 pr-3 py-2 rounded-lg bg-[#16192a] text-white text-sm w-full focus:outline-none focus:ring-1 focus:ring-pink-600 placeholder-gray-500"
+              className="pl-9 pr-3 py-2 rounded-3xl bg-[#16192a] text-white text-sm w-full focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder-gray-500"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <select
-            className="bg-[#16192a] text-white rounded-lg px-3 py-2 w-full md:w-1/4 text-sm focus:outline-none focus:ring-1 focus:ring-pink-600"
+            className="bg-[#16192a] text-white rounded-lg px-3 py-2 w-full md:w-1/4 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
             value={sortDesc ? "desc" : "asc"}
             onChange={(e) => setSortDesc(e.target.value === "desc")}
           >
@@ -134,7 +134,7 @@ export default function CasinoPage() {
             {filteredCasinos.map((casino, idx) => (
               <div
                 key={idx}
-                className="bg-[#101322] border border-[#1e2138] rounded-2xl p-6 h-48 flex flex-col justify-between relative shadow-lg hover:shadow-pink-900/20 transition-all duration-300 hover:-translate-y-1"
+                className="bg-[#101322] border border-[#1e2138] rounded-2xl p-6 h-48 flex flex-col justify-between relative shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="absolute top-5 left-5">{casino.icon}</div>
                 <div className="flex items-end justify-between mt-auto">
@@ -146,7 +146,7 @@ export default function CasinoPage() {
                       Founded {casino.year}
                     </p>
                   </div>
-                  <button className="bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full transition">
+                  <button className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-full transition">
                     <FaArrowRight size={14} />
                   </button>
                 </div>
@@ -161,7 +161,7 @@ export default function CasinoPage() {
             {filteredCasinos.map((casino, idx) => (
               <div
                 key={idx}
-                className="bg-[#101322] border border-[#1f2238] rounded-3xl px-4 py-2 flex items-center justify-between hover:bg-[#171a2e] transition-all duration-200 shadow-sm hover:shadow-pink-900/10"
+                className="bg-[#101322] border border-[#1f2238] rounded-3xl px-4 py-2 flex items-center justify-between hover:bg-[#171a2e] transition-all duration-200 shadow-sm hover:shadow-indigo-900/10"
               >
                 {/* Left: Icon + Name */}
                 <div className="flex items-center gap-2 min-w-0">
@@ -178,7 +178,7 @@ export default function CasinoPage() {
 
                 {/* Right: Stats */}
                 <div className="flex items-center gap-3 text-[11px] text-gray-400">
-                  <span className="text-pink-400 font-semibold whitespace-nowrap">
+                  <span className="text-indigo-400 font-semibold whitespace-nowrap">
                     Rank #{idx + 1}
                   </span>
                   <span className="hidden sm:inline-block whitespace-nowrap">

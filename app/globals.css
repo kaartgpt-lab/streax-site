@@ -1,7 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
 @import "tailwindcss";
 
 :root {
-    color-scheme: dark;
+    --brand-bg-dark-1: #0D1220;
+    --brand-bg-dark-2: #11182A;
+    --brand-pink: #FF4EDB;
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #CFCFE0;
+
+    --ui-dark-1: #1A243D;
+}
+
+/* ---------------------------
+   GLOBAL BASE STYLES
+---------------------------- */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Tektur", sans-serif;
+    background: linear-gradient(180deg, var(--brand-bg-dark-1), var(--brand-bg-dark-2));
+    color: var(--text-primary);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Anton', sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+/* Subtext / Paragraph */
+p,
+small,
+span {
+    font-family: 'Tektur', sans-serif;
+}
+
+/* ---------------------------
+   UI ELEMENT FONT STYLING
+   (Buttons, links, UI controls)
+---------------------------- */
+button,
+a,
+input,
+select,
+textarea,
+label {
+    font-family: 'Tektur', sans-serif !important;
+    font-weight: 600;
+    /* slight bold */
+    letter-spacing: 0.3px;
+    color: var(--text-primary);
+}
+
+div {
+    font-family: 'Tektur', sans-serif !important;
+    /* slight bold */
+    letter-spacing: 0.3px;
+}
+
+/* Optional Utilities */
+.text-pink {
+    color: var(--brand-pink);
+}
+
+.bg-pink {
+    background-color: var(--brand-pink);
 }
 
 /* hide scrollbar globally */
@@ -11,7 +83,27 @@
 
 .no-scrollbar {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
+}
+
+@keyframes hit-bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(4px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.hit-bounce {
+    animation: hit-bounce 0.45s ease-out;
 }

@@ -83,7 +83,7 @@ export default function NewsSection() {
       viewport={{ once: true, amount: 0.3 }}
       className="py-16 px-4 max-w-4xl mx-auto scroll-mt-24"
     >
-      <h2 className="text-4xl font-extrabold uppercase mb-4">News</h2>
+      <h1 className="text-6xl font-extrabold uppercase mb-4">News</h1>
       <p className="text-gray-400 mb-6 text-sm">
         Gain access to exclusive data-driven insights.
       </p>
@@ -92,9 +92,9 @@ export default function NewsSection() {
         <input
           type="email"
           placeholder="Your email address"
-          className="px-3 py-2 rounded-lg bg-[#16192a] border border-gray-700 w-64 focus:outline-none text-sm"
+          className="px-3 py-2 rounded-3xl bg-[#16192a] border border-gray-700 w-64 focus:outline-none text-sm"
         />
-        <button className="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-lg font-semibold text-sm transition">
+        <button className="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-3xl font-semibold text-sm transition">
           Subscribe
         </button>
       </div>
@@ -109,12 +109,26 @@ export default function NewsSection() {
           {newsItems.map((news, idx) => (
             <motion.div
               key={idx}
-              className="bg-[#101322] rounded-2xl shadow-lg min-w-[280px] max-w-[280px] flex-shrink-0 p-4"
+              className="bg-[#101322] border border-gray-800 rounded-2xl shadow-lg min-w-[320px] max-w-[320px] flex-shrink-0 p-4 
+               transition-transform duration-300 hover:-translate-y-2"
             >
-              <div className="bg-[#16192a] h-24 rounded-xl mb-3 flex items-center justify-center text-pink-400 font-bold text-lg">
-                {news.title}
+              {/* Top Banner */}
+              <div className="bg-[#16192a] border border-gray-800 h-32 rounded-xl mb-4 flex flex-col items-center justify-center px-3">
+                <h3 className="text-pink-400! font-extrabold text-xl text-center">
+                  {news.title}
+                </h3>
+                <p className="text-gray-400 text-xs mt-1 text-center">
+                  Crypto Casino Updates & News
+                </p>
+
+                {/* Date badge */}
+                <div className="mt-3 bg-[#0e111c] border border-gray-700 px-3 py-1 rounded-full text-[10px] text-gray-300">
+                  {news.date}
+                </div>
               </div>
-              <p className="text-gray-300 font-semibold mb-1 text-sm">
+
+              {/* Subtitle */}
+              <p className="text-gray-200 font-semibold mb-1 text-sm">
                 {news.subtitle.includes("Weekly") ? (
                   <>
                     iGaming <span className="text-pink-500">Weekly</span>
@@ -123,8 +137,14 @@ export default function NewsSection() {
                   news.subtitle
                 )}
               </p>
-              <p className="text-gray-500 text-xs mb-2">{news.date}</p>
-              <p className="text-gray-400 text-xs">{news.description}</p>
+
+              {/* Date below subtitle */}
+              <p className="text-gray-500 text-xs mb-3">{news.date}</p>
+
+              {/* Description */}
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {news.description}
+              </p>
             </motion.div>
           ))}
         </div>

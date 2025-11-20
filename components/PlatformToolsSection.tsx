@@ -33,7 +33,7 @@ export default function PlatformToolsSection() {
   const current = tabs.find((t) => t.name === activeTab)!;
 
   return (
-    <section className="bg-[#0C0F1A] text-white py-20 px-6 md:px-12">
+    <section className="bg-[#0a0d1a] text-white py-20 px-6 md:px-12">
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
@@ -45,20 +45,40 @@ export default function PlatformToolsSection() {
         </p>
 
         {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12">
-          {tabs.map((tab) => (
-            <button
-              key={tab.name}
-              onClick={() => setActiveTab(tab.name)}
-              className={`px-5 py-2 rounded-full font-medium text-sm transition ${
-                activeTab === tab.name
-                  ? "bg-[#2A2D3A] text-white"
-                  : "bg-[#171A23] text-gray-400 hover:text-white"
-              }`}
-            >
-              {tab.name}
-            </button>
-          ))}
+        <div className="relative flex justify-center mb-12">
+          <div className="relative bg-[#171A23] border border-gray-700 rounded-full flex space-x-2 p-1">
+            <motion.div
+              layout
+              className="absolute inset-y-0 my-1 border border-gray-600 bg-[#2A2D3A] rounded-full"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              style={{
+                width:
+                  activeTab === "Audits"
+                    ? "33%"
+                    : activeTab === "Creators"
+                    ? "33%"
+                    : "33%",
+                translateX:
+                  activeTab === "Audits"
+                    ? "0%"
+                    : activeTab === "Creators"
+                    ? "100%"
+                    : "200%",
+              }}
+            />
+
+            {tabs.map((tab) => (
+              <button
+                key={tab.name}
+                onClick={() => setActiveTab(tab.name)}
+                className={`relative z-10 px-5 py-2 rounded-full font-medium text-xs flex text-center justify-center transition ${
+                  activeTab === tab.name ? "text-white" : "text-gray-400"
+                }`}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Content */}
