@@ -53,7 +53,8 @@ a,
 input,
 select,
 textarea,
-label {
+label,
+option {
     font-family: 'Tektur', sans-serif !important;
     font-weight: 600;
     /* slight bold */

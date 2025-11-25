@@ -14,7 +14,7 @@ export default function SectionTitle({
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold">
         {title}
       </h2>
       {subtitle && <p className="mt-3 text-zinc-400">{subtitle}</p>}

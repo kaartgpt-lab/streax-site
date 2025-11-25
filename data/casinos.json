@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Stake",
+    "year": 2017,
+    "rank": 1,
+    "icon": "dice",
+    "image": "/globe.svg",
+    "amlPolicy": true,
+    "wagerRequirements": true,
+    "idOnSignup": true,
+    "detailsOnSignup": true,
+    "jurisdictionDisclosure": true,
+    "geoBlockingEnforcement": true
+  },
+  {
+    "name": "Roobet",
+    "year": 2019,
+    "rank": 2,
+    "icon": "money",
+    "image": "/globe.svg",
+    "amlPolicy": true,
+    "wagerRequirements": true,
+    "idOnSignup": false,
+    "detailsOnSignup": true,
+    "jurisdictionDisclosure": true,
+    "geoBlockingEnforcement": false
+  },
+  {
+    "name": "FortuneJack",
+    "year": 2018,
+    "rank": 3,
+    "icon": "coin",
+    "image": "/globe.svg",
+    "amlPolicy": false,
+    "wagerRequirements": true,
+    "idOnSignup": false,
+    "detailsOnSignup": false,
+    "jurisdictionDisclosure": true,
+    "geoBlockingEnforcement": false
+  },
+  {
+    "name": "BitStarz",
+    "year": 2016,
+    "rank": 4,
+    "icon": "gem",
+    "image": "/globe.svg",
+    "amlPolicy": true,
+    "wagerRequirements": true,
+    "idOnSignup": true,
+    "detailsOnSignup": false,
+    "jurisdictionDisclosure": true,
+    "geoBlockingEnforcement": true
+  },
+  {
+    "name": "BC.Game",
+    "year": 2018,
+    "rank": 5,
+    "icon": "ticket",
+    "image": "/globe.svg",
+    "amlPolicy": false,
+    "wagerRequirements": false,
+    "idOnSignup": false,
+    "detailsOnSignup": false,
+    "jurisdictionDisclosure": false,
+    "geoBlockingEnforcement": false
+  }
+]
