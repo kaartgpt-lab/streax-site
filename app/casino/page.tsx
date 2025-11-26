@@ -31,7 +31,7 @@ export default function CasinoPage() {
     .sort((a, b) => (sortDesc ? b.year - a.year : a.year - b.year));
 
   return (
-    <main className="pt-10 bg-[#0C0F1A] min-h-screen">
+    <main className="pt-10 bg-[#0b0d17] min-h-screen">
       <section className="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 py-12">
         <SectionTitle
           title="CASINOS"
@@ -110,7 +110,7 @@ export default function CasinoPage() {
                   className="absolute inset-0 opacity-[0.12] bg-cover bg-center"
                   style={{ backgroundImage: `url(${casino.image})` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0c0f1a] opacity-60" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent to-[#0c0f1a] opacity-60" />
                 <div className="absolute top-4 left-4 z-10">
                   <img
                     src={casino.image}

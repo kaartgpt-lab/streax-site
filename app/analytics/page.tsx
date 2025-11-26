@@ -116,7 +116,7 @@ export default function AnalyticsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#0B0E18] text-white px-6 py-20">
+    <main className="min-h-screen bg-[#0b0d17] text-white px-6 py-20">
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide mb-4">

@@ -33,7 +33,7 @@ export default function PlatformToolsSection() {
   const current = tabs.find((t) => t.name === activeTab)!;
 
   return (
-    <section className="bg-[#0a0d1a] text-white py-20 px-6 md:px-12">
+    <section className="bg-[#0b0c1a] text-white py-10 px-6 md:px-12">
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h2 className="text-3xl md:text-5xl font-extrabold mb-4">

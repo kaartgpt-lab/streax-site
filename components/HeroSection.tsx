@@ -27,7 +27,7 @@ export default function HeroSection() {
 
     const pegs: Peg[] = [];
     const chips: Chip[] = [];
-    let bottomY = 0; // collision line above cards
+    let bottomY = 0;
 
     const triggerCardHit = (cardIndex: number) => {
       setHitCardIndex(cardIndex);
@@ -36,7 +36,7 @@ export default function HeroSection() {
       }, 200);
     };
 
-    // build peg grid (rows 3 → 7), and set bottomY just below last row
+    // build peg grid (3 to 7 pegs per row, 5 rows total)
     const buildPegGrid = () => {
       pegs.length = 0;
       const w = canvas.clientWidth;
@@ -44,9 +44,13 @@ export default function HeroSection() {
 
       const rows = 5;
       const maxCols = 7;
-      const baseY = h * 0.12;
-      const gapY = h * 0.13;
-      const radius = 3;
+      const baseY = h * 0.15;
+
+      // Much tighter spacing on mobile
+      const gapY = w < 768 ? h * 0.12 : h * 0.18;
+
+      // Smaller pegs on mobile
+      const radius = w < 640 ? 3 : w < 768 ? 4 : 5;
 
       const stepX = w / (maxCols + 1);
 
@@ -68,7 +72,7 @@ export default function HeroSection() {
         }
       }
 
-      bottomY = lastRowY + h * 0.08; // small gap under last row
+      bottomY = lastRowY + h * 0.05;
     };
 
     const resize = () => {
@@ -85,14 +89,26 @@ export default function HeroSection() {
 
     const spawnChip = () => {
       const w = canvas.clientWidth;
-      const topY = canvas.clientHeight * 0.02;
+      const topY = -20;
+
+      // Small on mobile, noticeably bigger on desktop
+      let chipSize: number;
+      if (w < 640) {
+        chipSize = 6; // very small mobile
+      } else if (w < 768) {
+        chipSize = 8; // normal mobile
+      } else if (w < 1024) {
+        chipSize = 14; // tablet
+      } else {
+        chipSize = 20; // desktop – bigger
+      }
 
       chips.push({
         x: w / 2 + (Math.random() - 0.5) * (w * 0.2),
         y: topY,
         vx: (Math.random() - 0.5) * 1.2,
         vy: 1 + Math.random() * 0.5,
-        r: 14,
+        r: chipSize,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.04,
       });
@@ -115,7 +131,7 @@ export default function HeroSection() {
       ctx.clearRect(0, 0, w, h);
 
       // pegs
-      ctx.fillStyle = "rgba(140,144,170,0.4)";
+      ctx.fillStyle = "rgba(140,144,170,0.5)";
       for (const peg of pegs) {
         ctx.beginPath();
         ctx.arc(peg.x, peg.y, peg.r, 0, Math.PI * 2);
@@ -174,8 +190,7 @@ export default function HeroSection() {
             cardIndex = Math.min(cardsCount - 1, Math.max(0, cardIndex));
             triggerCardHit(cardIndex);
 
-            // immediately "respawn" at top (so it looks like it vanished)
-            const topY = canvas.clientHeight * 0.02;
+            const topY = -20;
             chip.x = w / 2 + (Math.random() - 0.5) * (w * 0.2);
             chip.y = topY;
             chip.vx = (Math.random() - 0.5) * 1.2;
@@ -185,7 +200,7 @@ export default function HeroSection() {
         }
       }
 
-      // chips (render as your rotated “S” square)
+      // chips
       for (const chip of chips) {
         ctx.save();
         ctx.translate(chip.x, chip.y);
@@ -238,42 +253,60 @@ export default function HeroSection() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className="relative flex justify-center min-h-[100vh] w-full bg-gradient-to-b from-indigo-900/10 via-purple-800/5 to-[#0a0d1a] overflow-hidden"
+      className="relative flex justify-center min-h-screen w-full overflow-hidden"
     >
-      <div className="w-full max-w-4xl px-6 pt-32 pb-16 flex flex-col items-center text-center">
-        <h1 className="text-[3.2rem] md:text-[5.8rem] font-extrabold uppercase leading-none tracking-[0.08em]">
+      {/* Background video with purple overlay */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-[0.06]"
+        >
+          <source src="/homebg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-linear-to-b from-[#0b0c1a]/10 via-[#0b0c1a]/5 to-[#0b0c1a]" />
+      </div>
+
+      <div className="w-full max-w-5xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 flex flex-col items-center text-center relative z-10">
+        <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.8rem] font-extrabold uppercase leading-[1.1] tracking-[0.08em]">
           CREATING THE
-          <br className="hidden md:block" /> TANZANITE STANDARD
+          <br className="hidden sm:block" /> TANZANITE STANDARD
         </h1>
 
-        <p className="mt-6 text-sm md:text-base text-gray-300 max-w-xl mx-auto">
+        {/* Hide on mobile, show on desktop */}
+        <p className="hidden sm:block mt-4 sm:mt-6 text-xs sm:text-sm md:text-base text-gray-300 max-w-xl mx-auto px-4">
           Brought to you with over{" "}
           <span className="font-semibold text-white">10 years</span> of
           experience in the crypto iGaming industry
         </p>
 
-        {/* Bigger Plinko grid */}
-        <div className="relative w-full mt-6 flex items-center justify-center">
+        {/* Plinko grid - tighter on mobile */}
+        <div className="relative w-full mt-0 flex items-center justify-center">
           <canvas
             ref={canvasRef}
             id="plinkoCanvas"
-            className="w-full opacity-80 pointer-events-none"
+            className="w-full h-[350px] sm:h-[550px] md:h-[600px] lg:h-[650px] opacity-80 pointer-events-none absolute top-0"
+            style={{ marginTop: "-60px" }}
           />
         </div>
 
-        {/* Cards – almost flush with grid */}
-        <div className="-mt-2 flex flex-col md:flex-row gap-6 md:gap-8 z-[10]">
+        {/* Cards – mobile optimized with title only, reduced gap on mobile */}
+        <div className="mt-45 sm:mt-[470px] md:mt-[520px] lg:mt-[570px] flex flex-row gap-2 sm:gap-6 md:gap-8 z-10 w-full max-w-4xl px-2 sm:px-4">
           {/* Card 1 */}
           <div
             className={[
-              "px-5 py-4 card bounce text-left rounded-xl border bg-[#131624]/90 shadow-lg transition-all duration-200",
+              "px-2 sm:px-5 py-2 sm:py-4 card bounce text-center sm:text-left rounded-lg sm:rounded-xl border bg-[#131624]/90 shadow-lg transition-all duration-200 flex-1",
               hitCardIndex === 0
-                ? "border-gray-700 hit-bounce" // ← bounce applied
+                ? "border-pink-500/50 shadow-pink-500/20 hit-bounce scale-105"
                 : "border-gray-700",
             ].join(" ")}
           >
-            <div className="card_title font-bold text-white">Innovative</div>
-            <div className="carddesc text-xs mt-2 text-gray-300">
+            <div className="card_title font-bold text-white text-xs sm:text-base">
+              Innovative
+            </div>
+            <div className="carddesc hidden sm:block text-xs mt-2 text-gray-300">
               Leading the charge with innovative solutions.
             </div>
           </div>
@@ -281,14 +314,16 @@ export default function HeroSection() {
           {/* Card 2 */}
           <div
             className={[
-              "px-5 py-4 card bounce text-left rounded-xl border bg-[#131624]/80 transition-all duration-200",
+              "px-2 sm:px-5 py-2 sm:py-4 card bounce text-center sm:text-left rounded-lg sm:rounded-xl border bg-[#131624]/90 shadow-lg transition-all duration-200 flex-1",
               hitCardIndex === 1
-                ? "border-gray-700 hit-bounce"
+                ? "border-pink-500/50 shadow-pink-500/20 hit-bounce scale-105"
                 : "border-gray-700",
             ].join(" ")}
           >
-            <div className="card_title font-bold text-white">Comprehensive</div>
-            <div className="carddesc text-xs mt-2 text-gray-300">
+            <div className="card_title font-bold text-white text-xs sm:text-base">
+              Comprehensive
+            </div>
+            <div className="carddesc hidden sm:block text-xs mt-2 text-gray-300">
               Thorough analysis of the leading crypto casinos.
             </div>
           </div>
@@ -296,61 +331,82 @@ export default function HeroSection() {
           {/* Card 3 */}
           <div
             className={[
-              "px-5 py-4 card bounce text-left rounded-xl border bg-[#131624]/80 transition-all duration-200",
+              "px-2 sm:px-5 py-2 sm:py-4 card bounce text-center sm:text-left rounded-lg sm:rounded-xl border bg-[#131624]/90 shadow-lg transition-all duration-200 flex-1",
               hitCardIndex === 2
-                ? "border-gray-700 hit-bounce"
+                ? "border-pink-500/50 shadow-pink-500/20 hit-bounce scale-105"
                 : "border-gray-700",
             ].join(" ")}
           >
-            <div className="card_title font-bold text-white">Data-driven</div>
-            <div className="carddesc text-xs mt-2 text-gray-300">
+            <div className="card_title font-bold text-white text-xs sm:text-base">
+              Data-driven
+            </div>
+            <div className="carddesc hidden sm:block text-xs mt-2 text-gray-300">
               Harnessing cutting edge technology to find value.
             </div>
           </div>
         </div>
 
         {/* Buttons */}
-        <div className="mt-10 flex gap-6 items-center z-[10]">
+        <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-6 items-center z-10">
           <button
             onClick={() => setIsPlaying((p) => !p)}
-            className="button play-button flex items-center gap-2 px-4 py-2"
+            className="button play-button flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#151829] rounded-full border-1 border-gray-700 font-xs transition-all duration-200 cursor-pointer"
           >
             {isPlaying ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
+                width="16"
+                height="16"
                 fill="white"
+                className="sm:w-[18px] sm:h-[18px]"
               >
-                <rect x="6" y="6" width="10" height="10" rx="1.5" />
+                <rect x="5" y="5" width="8" height="8" rx="1.5" />
               </svg>
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
+                width="16"
+                height="16"
                 fill="white"
+                className="sm:w-[18px] sm:h-[18px]"
               >
-                <path d="M8 6L16 11L8 16V6Z" />
+                <path d="M7 5L14 9.5L7 14V5Z" />
               </svg>
             )}
-            <p>{isPlaying ? "Stop" : "Play"}</p>
+            <p className="text-xs sm:text-xs">{isPlaying ? "Stop" : "Play"}</p>
           </button>
 
-          <div className="button pf-button flex items-center gap-2 px-4 py-2">
+          <div className="button pf-button flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 rounded-full font-xs transition-all duration-200 border border-white/20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               fill="white"
+              className="sm:w-[18px] sm:h-[18px]"
             >
-              <path d="M9.12495 12.9635L13.8333 8.25521L12.6458 7.06771L9.12495 10.5885L7.37495 8.83854L6.18745 10.026L9.12495 12.9635Z" />
-              <path d="M9.99995 18.3385C8.06939 17.8524 6.47564 16.7448 5.2187 15.0156C3.96175 13.2865 3.33328 11.3663 3.33328 9.25521V4.17187L9.99995 1.67188L16.6666 4.17187V9.25521C16.6666 11.3663 16.0381 13.2865 14.7812 15.0156C13.5243 16.7448 11.9305 17.8524 9.99995 18.3385Z" />
+              <path d="M8.5 12L12.5 8L11.5 7L8.5 10L7 8.5L6 9.5L8.5 12Z" />
+              <path d="M9 17C7.4 16.6 6.1 15.7 5.1 14.3C4.1 12.9 3.6 11.3 3.6 9.5V5.2L9 3L14.4 5.2V9.5C14.4 11.3 13.9 12.9 12.9 14.3C11.9 15.7 10.6 16.6 9 17Z" />
             </svg>
-            <p>Provably Fair</p>
+            <p className="text-xs sm:text-xs">Provably Fair</p>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes hit-bounce {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.08);
+          }
+        }
+
+        .hit-bounce {
+          animation: hit-bounce 0.3s ease-out;
+        }
+      `}</style>
     </motion.section>
   );
 }

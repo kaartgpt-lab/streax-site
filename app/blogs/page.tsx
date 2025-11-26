@@ -50,7 +50,7 @@ export default function BlogPage() {
   const [email, setEmail] = useState("");
 
   return (
-    <section className="bg-[#0B0E19] text-white py-24 px-6 md:px-20">
+    <section className="bg-[#0b0d17] text-white py-24 px-6 md:px-20">
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h1 className="text-6xl font-extrabold mb-4">BLOG</h1>
@@ -80,7 +80,7 @@ export default function BlogPage() {
               className="bg-[#13172A] rounded-2xl p-5 border border-gray-800 hover:border-pink-500 transition-all duration-300"
             >
               {/* Fake image area with text */}
-              <div className="h-40 rounded-xl mb-4 flex items-center justify-center text-center bg-gradient-to-r from-[#1B1E31] to-[#0F1222] border border-gray-700">
+              <div className="h-40 rounded-xl mb-4 flex items-center justify-center text-center bg-linear-to-r from-[#1B1E31] to-[#0F1222] border border-gray-700">
                 <div>
                   <h2 className="text-2xl md:text-3xl font-extrabold uppercase tracking-wide">
                     {blog.tag.split(" ")[0]}{" "}

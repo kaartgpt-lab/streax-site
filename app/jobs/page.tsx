@@ -165,7 +165,7 @@ export default function JobsPage() {
         <select className="bg-[#111422] text-sm rounded-full px-4 py-2 outline-none">
           <option>Country</option>
         </select>
-        <button className="bg-gradient-to-r from-pink-500 to-purple-600 text-sm font-semibold px-5 py-2 rounded-full">
+        <button className="bg-linear-to-r from-pink-500 to-purple-600 text-sm font-semibold px-5 py-2 rounded-full">
           Operator Login
         </button>
       </div>

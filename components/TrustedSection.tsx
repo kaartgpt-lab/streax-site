@@ -117,6 +117,14 @@ export default function ReviewsSection() {
 
   return (
     <section className="relative max-w-4xl mx-auto px-6 py-20 text-center">
+      {/* Bottom background image */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center z-0">
+        <img
+          src="/globe.svg"
+          alt=""
+          className="w-64 md:w-72 lg:w-86 opacity-40"
+        />
+      </div>
       <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed mb-6">
         We started Tanzanite to establish a new standard for the casino industry
         by conducting thorough audits and ensuring compliance, security, support
@@ -128,7 +136,7 @@ export default function ReviewsSection() {
       </h2>
 
       {/* Top Icons */}
-      <div className="flex justify-center mb-10 gap-3">
+      <div className="flex justify-center mb-5 gap-3">
         {reviews.map((_, idx) => (
           <button
             key={idx}
@@ -145,9 +153,11 @@ export default function ReviewsSection() {
         ))}
       </div>
 
-      {/* Left/Right Fade */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-[#0a0d1a] to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-[#0a0d1a] to-transparent z-10" />
+      {/* Left Fade */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-48 bg-linear-to-r from-[#0a0d1a] via-[#0a0d1a]/60 to-transparent z-10" />
+
+      {/* Right Fade */}
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-48 bg-linear-to-l from-[#0a0d1a] via-[#0a0d1a]/60 to-transparent z-10" />
 
       {/* Cards */}
       <div
@@ -159,11 +169,11 @@ export default function ReviewsSection() {
         {reviews.map((review, idx) => (
           <motion.div
             key={review.id}
-            className={`snap-center shrink-0 rounded-3xl px-5 py-5 w-64 md:w-72 h-[210px]
-              flex flex-col justify-between text-left relative transition-all duration-300
+            className={`snap-center shrink-0 rounded-3xl px-5 py-5 w-84 md:w-82 h-[210px]
+              flex flex-col justify-between text-left relative transition-all duration-300 backdrop-blur-md bg-[#050816]/50
               ${
                 activeIndex === idx
-                  ? " border border-pink-500 scale-105 z-10"
+                  ? " border border-pink-500 scale-95 z-10"
                   : " border border-gray-800 opacity-70 scale-95"
               }`}
             whileHover={{

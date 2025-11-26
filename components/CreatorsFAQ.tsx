@@ -56,7 +56,7 @@ const faqItems: FaqItem[] = [
 
 export default function CreatorsFaq() {
   return (
-    <section className="mt-32 w-full max-w-2xl px-6 text-white border border-gray-800 rounded-2xl bg-[#0C0F1A] mx-auto py-12">
+    <section className="mt-32 w-full max-w-2xl px-6 text-white border border-gray-800 rounded-2xl bg-[#0b0d17] mx-auto py-12">
       <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center tracking-wide">
         Frequently Asked Questions
       </h2>

@@ -57,7 +57,7 @@ export default function CreatorsPage() {
             {liveCreators.map((creator) => (
               <div
                 key={creator.id}
-                className="bg-[#141627] rounded-2xl p-5 min-w-[16.666%] flex-shrink-0 shadow-md hover:shadow-lg transition flex flex-col items-center"
+                className="bg-[#141627] rounded-2xl p-5 min-w-[16.666%] shrink-0 shadow-md hover:shadow-lg transition flex flex-col items-center"
               >
                 {/* avatar instead of icon */}
                 <div className="flex justify-center mb-4">
@@ -67,7 +67,7 @@ export default function CreatorsPage() {
                     className="h-14 w-14 rounded-full object-cover border border-[#262a43]"
                   />
                 </div>
-                <p className="text-xs px-2 py-1 mb-4 rounded-full bg-gray-700 text-gray-200 mb-1">
+                <p className="text-xs px-2 py-1 mb-4 rounded-full bg-gray-700 text-gray-200">
                   🔴 {creator.liveViewers} viewers
                 </p>
                 <p className="text-xs font-semibold">{creator.name}</p>
@@ -91,10 +91,10 @@ export default function CreatorsPage() {
             ))}
           </div>
 
-          <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-[#0b0c1a]"></div>
+          <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-linear-to-l from-[#0b0c1a]"></div>
         </div>
 
-        <div className="h-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-transparent mt-6"></div>
+        <div className="h-0.5 bg-linear-to-r from-pink-500 via-purple-500 to-transparent mt-6"></div>
       </section>
 
       {/* Table Section – Casino-style grid rows */}
@@ -252,7 +252,7 @@ export default function CreatorsPage() {
             Are you an influencer and do you value transparency for your
             viewers? Apply today and become a part of the Tanzanite Standard.
           </p>
-          <button className="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-semibold text-white hover:opacity-90 transition">
+          <button className="px-8 py-3 rounded-full bg-linear-to-r from-pink-500 to-purple-600 font-semibold text-white hover:opacity-90 transition">
             JOIN
           </button>
         </div>
@@ -261,7 +261,7 @@ export default function CreatorsPage() {
         <div className="flex-1 flex justify-center md:justify-center">
           <div className="relative flex items-center justify-center">
             {/* soft glow only */}
-            <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full" />
+            <div className="absolute inset-0 blur-3xl bg-linear-to-r from-pink-500/20 to-purple-600/20 rounded-full" />
             {/* globe, no border/shadow */}
             <img
               src="/globe.svg"

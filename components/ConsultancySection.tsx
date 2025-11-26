@@ -61,7 +61,7 @@ export default function ConsultancySection() {
           experience for users.
         </p>
 
-        <button className="mt-8 bg-gradient-to-r from-pink-600 to-pink-400 hover:from-pink-700 hover:to-pink-500 text-white px-6 py-3 rounded-full font-semibold transition">
+        <button className="mt-8 bg-linear-to-r from-pink-600 to-pink-400 hover:from-pink-700 hover:to-pink-500 text-white px-6 py-3 rounded-full font-semibold transition">
           Get in touch
         </button>
       </div>
