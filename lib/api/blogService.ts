@@ -168,6 +168,31 @@ export async function getBlogById(idOrSlug: string): Promise<ApiResponse<BlogDat
 }
 
 /**
+ * Get a single blog by ID for editing (with all content)
+ */
+export async function getBlogForEdit(id: string): Promise<ApiResponse<BlogData>> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blogs/edit/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...getAuthHeader(),
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to fetch blog for editing");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching blog for edit:", error);
+    throw error;
+  }
+}
+
+/**
  * Update a blog post
  */
 export async function updateBlog(
@@ -320,6 +345,7 @@ export default {
   getAllBlogs,
   getAllBlogsForAdmin,
   getBlogById,
+  getBlogForEdit,
   updateBlog,
   deleteBlog,
   searchBlogs,

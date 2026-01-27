@@ -7,6 +7,7 @@ import {
   updateBlog,
   deleteBlog,
   getAllBlogsForAdmin,
+  getBlogForEdit,
   BlogData,
   BlogContentSection,
 } from "@/lib/api/blogService";
@@ -137,13 +138,33 @@ function AdminBlogsContent() {
   };
 
   // Edit blog
-  const handleEditBlog = (blog: BlogData) => {
-    setNewBlog({
-      ...blog,
-      content: blog.content || [],
-    });
-    setEditingId(blog._id || null);
-    setShowCreateForm(true);
+  const handleEditBlog = async (blog: BlogData) => {
+    try {
+      // Fetch the blog with all content to ensure we have everything
+      const response = await getBlogForEdit(blog._id || "");
+      if (response.success && response.data) {
+        const fullBlog = response.data;
+        console.log("Loaded blog for editing:", {
+          title: fullBlog.title,
+          contentLength: fullBlog.content ? fullBlog.content.length : 0,
+          content: fullBlog.content,
+        });
+        setNewBlog({
+          ...fullBlog,
+          content: fullBlog.content || [],
+          tags: fullBlog.tags || [],
+        });
+        setEditingId(fullBlog._id || null);
+        setShowCreateForm(true);
+      } else {
+        setError("Failed to load blog for editing");
+      }
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to load blog for editing";
+      console.error("Error loading blog for edit:", err);
+      setError(errorMessage);
+    }
   };
 
   // Delete blog
