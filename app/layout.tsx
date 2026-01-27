@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/lib/contexts/AuthContext";
 
 export const metadata: Metadata = {
   title: "Streax",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main className="bg-[#0b0c1a]">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main className="bg-[#0b0c1a]">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
