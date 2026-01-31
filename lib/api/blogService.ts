@@ -1,13 +1,13 @@
-// API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
-// Get token from localStorage
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
+
+
 const getToken = () => {
   if (typeof window === "undefined") return null;
   return localStorage.getItem("authToken");
 };
 
-// Get authorization header
+
 const getAuthHeader = (): Record<string, string> => {
   const token = getToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
