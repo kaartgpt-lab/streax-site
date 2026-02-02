@@ -253,7 +253,7 @@ export default function HeroSection() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className="relative flex justify-center min-h-screen w-full overflow-hidden"
+      className="relative flex justify-center min-h-[50vh] sm:min-h-screen w-full overflow-hidden"
     >
       {/* Background video with purple overlay */}
       <div className="absolute inset-0 z-0">
