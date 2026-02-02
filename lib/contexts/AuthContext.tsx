@@ -52,7 +52,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         handleLogout();
       }
     } catch (error) {
-      console.error("Auth verification failed:", error);
+      // Silently handle auth verification failure for public pages
+      console.log("Auth verification failed - user not authenticated");
       handleLogout();
     } finally {
       setIsLoading(false);
