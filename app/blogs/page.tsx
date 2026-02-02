@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Blog {
   _id: string;
@@ -20,6 +20,8 @@ export default function BlogPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+  const router = useRouter();
 
   useEffect(() => {
     fetchBlogs();
@@ -107,35 +109,20 @@ export default function BlogPage() {
         {!loading && !error && blogs.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogs.map((blog) => (
-              <Link
+              <div
                 key={blog._id}
-                href={`/blogs/${blog.slug}`}
-                className="bg-[#13172A] rounded-2xl p-5 border border-gray-800 hover:border-pink-500 transition-all duration-300 block"
+                onClick={() => router.push(`/blogs/${blog.slug}`)}
+                className="bg-[#13172A] rounded-2xl p-5 border border-gray-800 hover:border-pink-500 transition-all duration-300 cursor-pointer"
               >
                 {/* Featured Image */}
                 <div className="h-40 rounded-xl mb-4 overflow-hidden bg-gradient-to-r from-[#1B1E31] to-[#0F1222] border border-gray-700">
-                  {blog.featuredImageUrl ? (
+                  {blog.featuredImageUrl && !imageErrors[blog._id] ? (
                     <img
                       src={blog.featuredImageUrl}
                       alt={blog.title}
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        if (target.parentElement) {
-                          target.parentElement.innerHTML = `
-                            <div class="flex items-center justify-center h-full text-center p-4">
-                              <div>
-                                <h2 class="text-2xl md:text-3xl font-extrabold uppercase tracking-wide">
-                                  ${blog.category || "Blog"}
-                                </h2>
-                                <p class="text-xs text-gray-400 mt-1">
-                                  ${blog.author || "Streax"}
-                                </p>
-                              </div>
-                            </div>
-                          `;
-                        }
+                      onError={() => {
+                        setImageErrors(prev => ({ ...prev, [blog._id]: true }));
                       }}
                     />
                   ) : (
@@ -145,7 +132,7 @@ export default function BlogPage() {
                           {blog.category || "Blog"}
                         </h2>
                         <p className="text-xs text-gray-400 mt-1">
-                          {blog.author || "Streax"}
+                          Harshita Joshi
                         </p>
                       </div>
                     </div>
@@ -157,9 +144,32 @@ export default function BlogPage() {
                   <h3 className="text-xl font-semibold mb-2 line-clamp-2">
                     {blog.title}
                   </h3>
-                  <p className="text-gray-400 text-sm mb-3">
-                    {formatDate(blog.createdAt)}
-                  </p>
+                  
+                  {/* Author Info */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <img
+                      src="/author.jpeg"
+                      alt="Harshita Joshi"
+                      className="w-8 h-8 rounded-full object-cover border border-pink-500"
+                    />
+                    <div className="flex flex-col">
+                      <a
+                        href="https://www.linkedin.com/in/harshita-joshi-744a76240?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-white hover:text-pink-400 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        Harshita Joshi
+                      </a>
+                      <span className="text-xs text-gray-400">
+                        {formatDate(blog.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+
                   {blog.description && (
                     <p className="text-gray-300 text-sm line-clamp-3">
                       {blog.description}
@@ -178,7 +188,7 @@ export default function BlogPage() {
                     </div>
                   )}
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}

@@ -29,6 +29,8 @@ export default function BlogPostPage() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [featuredImageError, setFeaturedImageError] = useState(false);
+  const [contentImageErrors, setContentImageErrors] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (params.slug) {
@@ -112,16 +114,13 @@ export default function BlogPostPage() {
         </Link>
 
         {/* Featured Image */}
-        {blog.featuredImageUrl && (
+        {blog.featuredImageUrl && !featuredImageError && (
           <div className="w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-8 border border-gray-800 bg-gradient-to-r from-[#1B1E31] to-[#0F1222]">
             <img
               src={blog.featuredImageUrl}
               alt={blog.title}
               className="w-full h-full object-cover"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }}
+              onError={() => setFeaturedImageError(true)}
             />
           </div>
         )}
@@ -136,9 +135,28 @@ export default function BlogPostPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             {blog.title}
           </h1>
+          
+          {/* Author Section */}
+          <div className="flex items-center gap-4 mb-4 p-4 bg-[#13172A] rounded-xl border border-gray-800">
+            <img
+              src="/author.jpeg"
+              alt="Harshita Joshi"
+              className="w-16 h-16 rounded-full object-cover border-2 border-pink-500"
+            />
+            <div>
+              <p className="text-sm text-gray-400 mb-1">Written by</p>
+              <a
+                href="https://www.linkedin.com/in/harshita-joshi-744a76240?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg font-semibold text-white hover:text-pink-400 transition-colors"
+              >
+                Harshita Joshi
+              </a>
+            </div>
+          </div>
+
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
-            {blog.author && <span>By {blog.author}</span>}
-            <span>•</span>
             <span>{formatDate(blog.createdAt)}</span>
             <span>•</span>
             <span>{blog.views} views</span>
@@ -154,34 +172,33 @@ export default function BlogPostPage() {
             blog.content
               .sort((a, b) => a.order - b.order)
               .map((section, index) => {
+                const sectionKey = section._id || `section-${index}`;
                 if (section.type === "image") {
                   return (
                     <div
-                      key={section._id || `image-${index}`}
+                      key={sectionKey}
                       className="my-8 rounded-xl overflow-hidden border border-gray-800 bg-gradient-to-r from-[#1B1E31] to-[#0F1222]"
                     >
-                      <img
-                        src={section.content}
-                        alt="Blog content"
-                        className="w-full h-auto"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          if (target.parentElement) {
-                            target.parentElement.innerHTML = `
-                              <div class="flex items-center justify-center p-8 text-gray-400">
-                                <p>Image unavailable</p>
-                              </div>
-                            `;
-                          }
-                        }}
-                      />
+                      {!contentImageErrors[sectionKey] ? (
+                        <img
+                          src={section.content}
+                          alt="Blog content"
+                          className="w-full h-auto"
+                          onError={() => {
+                            setContentImageErrors(prev => ({ ...prev, [sectionKey]: true }));
+                          }}
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center p-8 text-gray-400">
+                          <p>Image unavailable</p>
+                        </div>
+                      )}
                     </div>
                   );
                 } else {
                   return (
                     <div
-                      key={section._id || `text-${index}`}
+                      key={sectionKey}
                       className="text-gray-300 leading-relaxed my-6 whitespace-pre-wrap"
                     >
                       {section.content}
