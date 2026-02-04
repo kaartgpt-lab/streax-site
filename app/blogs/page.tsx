@@ -131,9 +131,6 @@ export default function BlogPage() {
                         <h2 className="text-2xl md:text-3xl font-extrabold uppercase tracking-wide">
                           {blog.category || "Blog"}
                         </h2>
-                        <p className="text-xs text-gray-400 mt-1">
-                          Harshita Joshi
-                        </p>
                       </div>
                     </div>
                   )}
@@ -145,30 +142,9 @@ export default function BlogPage() {
                     {blog.title}
                   </h3>
                   
-                  {/* Author Info */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <img
-                      src="/author.jpeg"
-                      alt="Harshita Joshi"
-                      className="w-8 h-8 rounded-full object-cover border border-pink-500"
-                    />
-                    <div className="flex flex-col">
-                      <a
-                        href="https://www.linkedin.com/in/harshita-joshi-744a76240?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-white hover:text-pink-400 transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        Harshita Joshi
-                      </a>
-                      <span className="text-xs text-gray-400">
-                        {formatDate(blog.createdAt)}
-                      </span>
-                    </div>
-                  </div>
+                  <p className="text-gray-400 text-sm mb-3">
+                    {formatDate(blog.createdAt)}
+                  </p>
 
                   {blog.description && (
                     <p className="text-gray-300 text-sm line-clamp-3">

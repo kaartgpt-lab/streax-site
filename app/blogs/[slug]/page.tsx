@@ -135,26 +135,6 @@ export default function BlogPostPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             {blog.title}
           </h1>
-          
-          {/* Author Section */}
-          <div className="flex items-center gap-4 mb-4 p-4 bg-[#13172A] rounded-xl border border-gray-800">
-            <img
-              src="/author.jpeg"
-              alt="Harshita Joshi"
-              className="w-16 h-16 rounded-full object-cover border-2 border-pink-500"
-            />
-            <div>
-              <p className="text-sm text-gray-400 mb-1">Written by</p>
-              <a
-                href="https://www.linkedin.com/in/harshita-joshi-744a76240?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg font-semibold text-white hover:text-pink-400 transition-colors"
-              >
-                Harshita Joshi
-              </a>
-            </div>
-          </div>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
             <span>{formatDate(blog.createdAt)}</span>

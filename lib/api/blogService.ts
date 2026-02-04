@@ -402,14 +402,6 @@ export async function login(
  */
 export async function verifyAuth(): Promise<ApiResponse<any>> {
   try {
-    const token = getToken();
-    if (!token) {
-      return {
-        success: false,
-        message: "No token found",
-      };
-    }
-
     const response = await fetch(`${API_BASE_URL}/auth/verify`, {
       method: "GET",
       headers: {
@@ -419,19 +411,13 @@ export async function verifyAuth(): Promise<ApiResponse<any>> {
     });
 
     if (!response.ok) {
-      return {
-        success: false,
-        message: "Token verification failed",
-      };
+      throw new Error("Token verification failed");
     }
 
     return await response.json();
   } catch (error) {
-    console.log("Error verifying auth:", error);
-    return {
-      success: false,
-      message: "Token verification failed",
-    };
+    console.error("Error verifying auth:", error);
+    throw error;
   }
 }
 
